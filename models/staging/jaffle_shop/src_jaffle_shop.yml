@@ -6,11 +6,22 @@ sources:
     schema: jaffle_shop
     tables:
       - name: customers
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
+
       - name: orders
         loaded_at_field: _ETL_LOADED_AT
         freshness:
             warn_after: {count: 15, period: day}
             error_after: {count: 24, period: day}
+        columns:
+          - name: id
+            tests:
+              - unique
+              - not_null
 
   - name: stripe
     database: raw
